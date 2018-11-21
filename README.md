@@ -157,7 +157,7 @@ $ cp Vagrantfile.multi Vagrantfile
 $ vagrant up 
 
 
-## Setup kubectl
+## Setup kubectl and rancher-cli
 ```
 $cat /etc/hosts
 
@@ -181,8 +181,30 @@ VMhost$ kubectl get nodes
 NAME    STATUS   ROLES                      AGE   VERSION
 node1   Ready    controlplane,etcd,worker   34m   v1.10.5
 ```
-
 ```
+VMhost:~$ wget https://github.com/rancher/cli/releases/download/v2.0.5/rancher-linux-amd64-v2.0.5.tar.gz
+VMhost:~$ tar -zxvf rancher-linux-amd64-v2.0.5.tar.xz 
+VMhost:~$ sudo cp rancher-v2.0.5/rancher /usr/local/bin
+
+Get tokken from config.multi
+$ rancher login https://master.rancher.local/ --token kubeconfig-user-b9wdg:b8ms7rzwk4mzb5vdlgtzc2w7njr4ntbb9m8778jxt9qnlj6t7g7rh8
+....
+Do you want to continue connecting (yes/no)? yes
+INFO[0003] Only 1 project available: Default            
+INFO[0003] Saving config to /home/davar/.rancher/cli2.json 
+
+$ rancher kubectl get nodes
+NAME    STATUS   ROLES                      AGE   VERSION
+node1   Ready    controlplane,etcd,worker   39m   v1.10.5
+
+$ rancher kubectl create -f .
+```
+
+
+
+
+
+
 
 ## Useful references
 
