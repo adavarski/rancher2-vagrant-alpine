@@ -25,7 +25,7 @@ Because of bug:
 Add this line to pack.sh
 
 sed -i '/ulimit -p unlimited/a mount --make-shared /' /etc/init.d/docker
-
+```
 #!/sbin/openrc-run
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
@@ -63,7 +63,7 @@ mount --make-shared /
 
 	return 0
 }
-
+```
 
 ## Run
 
