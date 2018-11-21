@@ -210,6 +210,6 @@ $ rancher kubectl create -f .
 
 - Alpine sections based on Matt Maier's [vagrant-alpine plugin](https://github.com/maier/vagrant-alpine), [alpine-vagrant 3.8 box](https://github.com/rgl/alpine-vagrant) and [packer-templates](https://github.com/maier/packer-templates/)
 - https://ketzacoatl.github.io/posts/2017-06-01-use-existing-vagrant-box-in-a-packer-build.html describes how to build using another vagrant box as base, this build originally used https://vagrantcloud.com/bento/boxes/ubuntu-18.04/versions/201807.12.0/providers/virtualbox.box
-- see https://gist.github.com/superseb/29af10c2de2a5e75ef816292ef3ae426 for example of Rancher 2 REST API calls to create and add a new cluster
+- see https://gist.github.com/superseb/c363247c879e96c982495daea1125276 for example of Rancher 2 REST API calls to create and add a new cluster
 - see https://gist.github.com/superseb/cad9b87c844f166b9c9bf97f5dea1609 for example of Rancher 2 REST API calls to create kubeconfig
 ```
