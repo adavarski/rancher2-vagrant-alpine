@@ -110,3 +110,48 @@ rancher2:~$ sudo cp rancher-v2.0.5/rancher /usr/local/bin
 - https://ketzacoatl.github.io/posts/2017-06-01-use-existing-vagrant-box-in-a-packer-build.html describes how to build using another vagrant box as base, this build originally used https://vagrantcloud.com/bento/boxes/ubuntu-18.04/versions/201807.12.0/providers/virtualbox.box
 - see https://gist.github.com/superseb/29af10c2de2a5e75ef816292ef3ae426 for example of Rancher 2 REST API calls to create and add a new cluster
 - see https://gist.github.com/superseb/cad9b87c844f166b9c9bf97f5dea1609 for example of Rancher 2 REST API calls to create kubeconfig
+
+# rancher2-multi-node-cluster-vagrant
+
+```
+Vagrantfile.multi fixes
+
+Fix1: vb.customize ["modifyvm", :id, "--audio", "none"]
+
+because of 
+
+There was an error while executing `VBoxManage`, a CLI used by Vagrant
+for controlling VirtualBox. The command and stderr is shown below.
+
+Command: ["startvm", "d80ecd39-65eb-42af-96e2-efc692026af0", "--type", "headless"]
+
+Stderr: VBoxManage: error: The specified string / bytes buffer was to small. Specify a larger one and retry. (VERR_CFGM_NOT_ENOUGH_SPACE)
+VBoxManage: error: Details: code NS_ERROR_FAILURE (0x80004005), component ConsoleWrap, interface IConsole
+
+Fix2:
+config.vbguest.auto_update = false
+config.vm.synced_folder ".", "/vagrant", disabled: true
+    
+```
+```
+$ cp Vagrantfile.multi Vagrantfile
+$ vagrant up 
+
+$ echo "master.rancher.local 192.168.34.10"|sudo tee -a /etc/hosts
+master.rancher.local 192.168.34.10
+$ echo "node1.rancher.local 192.168.34.11"|sudo tee -a /etc/hosts
+node1.rancher.local 192.168.34.11
+
+Login browser: https://master.rancher.local
+user:admin
+password: password
+
+Go to playground cluster -> Kubeconfig file
+ 
+Copy configuration and put to config.multi file
+VMhost$ export KUBECONFIG=./config.multi
+VMhost$ kubectl get nodes
+NAME    STATUS   ROLES                      AGE   VERSION
+node1   Ready    controlplane,etcd,worker   34m   v1.10.5
+
+```
