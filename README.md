@@ -79,6 +79,16 @@ mount --make-shared /
    Sometimes I have to log out and in again after setting up the password.
 7. Go to "Clusters" in the Rancher UI and see the state of the "local-cluster" which will
    probably take a while to download all the images and start the cluster.
+   
+## Setup kubectl
+```
+$ scp -i .vagrant/machines/default/virtualbox/private_key  -P 2222 vagrant@127.0.0.1:.kube/config .
+$ sed -i -e 's/localhost/rancher2/g' config
+$ export KUBECONFIG=./config 
+$ kubectl get node
+NAME       STATUS   ROLES                      AGE   VERSION
+rancher2   Ready    controlplane,etcd,worker   44m   v1.10.5
+```
 
 ## Useful references
 
