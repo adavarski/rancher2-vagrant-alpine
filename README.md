@@ -88,6 +88,20 @@ $ export KUBECONFIG=./config
 $ kubectl get node
 NAME       STATUS   ROLES                      AGE   VERSION
 rancher2   Ready    controlplane,etcd,worker   44m   v1.10.5
+$ kubectl run hello-node --image=gcr.io/hello-minikube-zero-install/hello-node --port=8080
+$ vagrant ssh
+rancher2:~$ wget https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin
+/linux/amd64/kubectl
+rancher2:~$ chmod +x kubectl 
+rancher2:~$ sudo cp kubectl /usr/local/bin
+rancher2:~$ kubectl get pods
+NAME                          READY   STATUS    RESTARTS   AGE
+hello-node-5f76cf6ccf-ppdmx   1/1     Running   0          18m
+
+rancher2:~$ wget https://github.com/rancher/cli/releases/download/v2.0.5/rancher-linux-amd64-v2.0.5.tar.gz
+rancher2:~$ tar -zxvf rancher-linux-amd64-v2.0.5.tar.xz 
+rancher2:~$ sudo cp rancher-v2.0.5/rancher /usr/local/bin
+
 ```
 
 ## Useful references
