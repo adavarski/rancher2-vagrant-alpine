@@ -1,4 +1,4 @@
-# rancher2-vagrant
+# rancher2-single-node-cluster-vagrant
 
 A vagrant box which runs a Rancher 2.0 server and single node Kubernetes cluster for local development.
 
