@@ -109,6 +109,30 @@ rancher2:~$ sudo cp rancher-v2.0.5/rancher /usr/local/bin
 
 # rancher2-multi-node-cluster-vagrant
 
+A vagrant multi node Rancher 2.0 Kubernetes cluster for local development.
+
+-
+- Starts a [Rancher 2.0](https://hub.docker.com/r/rancher/rancher/) server container and sets the server url to https://master.rancher.local/ where you can access the Rancher UI.
+- Starts [Rancher Agent](https://hub.docker.com/r/rancher/rancher-agent) containers on nodes that will create a local Kubernetes cluster and link it to the Rancher Server.
+
+
+First version was based on the Chef base box [bento/ubuntu-18.04](https://github.com/chef/bento/tree/master/ubuntu)
+and included all the base images, but was 1.3G in size. Now using Alpine Linux for a smaller base (around 80 MB) and only pre-pulling
+the Rancher 2.0 Server image which is around 160 MB compressed.
+
+
+
+## Run
+
+1. Install the Vagrant Alpine plugin `vagrant plugin install vagrant-alpine`
+2. Use the supplied vagrant file Vagrantfile.multi and run `vagrant up`
+3. Set the admin password = password
+4. Run `vagrant ssh` to log into the VM, then run `kubectl cluster-info`.
+5. Go to "Clusters" in the Rancher UI and see the state of the "playground" which will
+   probably take a while to download all the images and start the cluster.
+   
+```
+
 ```
 Vagrantfile.multi fixes
 
@@ -133,6 +157,9 @@ config.vm.synced_folder ".", "/vagrant", disabled: true
 $ cp Vagrantfile.multi Vagrantfile
 $ vagrant up 
 
+
+## Setup kubectl
+
 $cat /etc/hosts
 
 ## vagrant-hostmanager-start id: ccc6ca0f-3f4f-4911-89df-62b5159620b1
@@ -140,7 +167,6 @@ $cat /etc/hosts
 192.168.34.11	node1.rancher.local
 
 ## vagrant-hostmanager-end
-
 
 Login browser: https://master.rancher.local
 user:admin
@@ -153,6 +179,7 @@ VMhost$ export KUBECONFIG=./config.multi
 VMhost$ kubectl get nodes
 NAME    STATUS   ROLES                      AGE   VERSION
 node1   Ready    controlplane,etcd,worker   34m   v1.10.5
+
 
 ```
 
