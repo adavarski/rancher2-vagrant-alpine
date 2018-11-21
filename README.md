@@ -124,11 +124,10 @@ the Rancher 2.0 Server image which is around 160 MB compressed.
 
 ## Run
 
-1. Install the Vagrant Alpine plugin `vagrant plugin install vagrant-alpine`
-2. Use the supplied vagrant file Vagrantfile.multi and run `vagrant up`
-3. Set the admin password = password
-4. Run `vagrant ssh` to log into the VM, then run `kubectl cluster-info`.
-5. Go to "Clusters" in the Rancher UI and see the state of the "playground" which will
+1. Install the Vagrant Alpine plugin `vagrant plugin install vagrant-alpine vagrant-hostmanager`
+2. Use the supplied vagrant file Vagrantfile.multi and run: `$cp Vagrantfile.multi Vagrantfile`;`vagrant up`
+3. admin password is settuped = password
+4. Go to "Clusters" in the Rancher UI and see the state of the "playground" which will
    probably take a while to download all the images and start the cluster.
    
 ```
@@ -159,7 +158,7 @@ $ vagrant up
 
 
 ## Setup kubectl
-
+```
 $cat /etc/hosts
 
 ## vagrant-hostmanager-start id: ccc6ca0f-3f4f-4911-89df-62b5159620b1
@@ -167,6 +166,7 @@ $cat /etc/hosts
 192.168.34.11	node1.rancher.local
 
 ## vagrant-hostmanager-end
+```
 
 Login browser: https://master.rancher.local
 user:admin
@@ -175,11 +175,12 @@ password: password
 Go to playground cluster -> Kubeconfig file
  
 Copy configuration and put to config.multi file
+```
 VMhost$ export KUBECONFIG=./config.multi
 VMhost$ kubectl get nodes
 NAME    STATUS   ROLES                      AGE   VERSION
 node1   Ready    controlplane,etcd,worker   34m   v1.10.5
-
+```
 
 ```
 
@@ -189,3 +190,4 @@ node1   Ready    controlplane,etcd,worker   34m   v1.10.5
 - https://ketzacoatl.github.io/posts/2017-06-01-use-existing-vagrant-box-in-a-packer-build.html describes how to build using another vagrant box as base, this build originally used https://vagrantcloud.com/bento/boxes/ubuntu-18.04/versions/201807.12.0/providers/virtualbox.box
 - see https://gist.github.com/superseb/29af10c2de2a5e75ef816292ef3ae426 for example of Rancher 2 REST API calls to create and add a new cluster
 - see https://gist.github.com/superseb/cad9b87c844f166b9c9bf97f5dea1609 for example of Rancher 2 REST API calls to create kubeconfig
+```
