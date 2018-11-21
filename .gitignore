@@ -1,0 +1,5 @@
+packer_cache
+rancher2.box
+docker
+.vagrant/
+Vagrantfile.ORIG
