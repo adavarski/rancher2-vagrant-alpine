@@ -137,10 +137,14 @@ config.vm.synced_folder ".", "/vagrant", disabled: true
 $ cp Vagrantfile.multi Vagrantfile
 $ vagrant up 
 
-$ echo "master.rancher.local 192.168.34.10"|sudo tee -a /etc/hosts
-master.rancher.local 192.168.34.10
-$ echo "node1.rancher.local 192.168.34.11"|sudo tee -a /etc/hosts
-node1.rancher.local 192.168.34.11
+$cat /etc/hosts
+
+## vagrant-hostmanager-start id: ccc6ca0f-3f4f-4911-89df-62b5159620b1
+192.168.34.10	master.rancher.local
+192.168.34.11	node1.rancher.local
+
+## vagrant-hostmanager-end
+
 
 Login browser: https://master.rancher.local
 user:admin
