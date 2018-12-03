@@ -2,6 +2,8 @@
 
 If you have [Packer](https://www.packer.io/) and [VirtualBox](https://www.virtualbox.org/) installed you can run `build.sh` to create a new box image.
 
+## Vagrant Cloud box URL: https://app.vagrantup.com/davarski/boxes/rancher2
+
 Startup of images is done in the Vagrantfile inline provision script so that
 fresh server tokens are generated at that time and not included in the box image.
 
